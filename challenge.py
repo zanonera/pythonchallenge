@@ -9,14 +9,14 @@ print(2**38)
 intab='abcdefghijklmnopqrstuvwxyz'
 outtab='cdefghijklmnopqrstuvwxyzab'
 trantab=str.maketrans(intab,outtab)
-str="g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
-print(str.translate(trantab))
-str="http://www.pythonchallenge.com/pc/def/map.html"
-print(str.translate(trantab))
+msg="g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
+print(msg.translate(trantab))
+msg="http://www.pythonchallenge.com/pc/def/map.html"
+print(msg.translate(trantab))
 
 # Challenge 2
 #www.pythonchallenge.com/pc/def/ocr.html
-str="""
+msg="""
 %%$@_$^__#)^)&!_+]!*@&^}@[@%]()%+$&[(_@%+%$*^@$^!+]!&_#)_*}{}}!}_]$[%}@[{_@#_^{*
 @##&{#&{&)*%(]{{([*}@[@&]+!!*{)!}{%+{))])[!^})+)$]#{*+^((@^@}$[**$&^{$!@#$%)!@(&
 +^!{%_$&@^!}$_${)$_#)!({@!)(^}!*^&!$%_&&}&_#&@{)]{+)%*{&*%*&@%$+]!*__(#!*){%&@++
@@ -1241,7 +1241,7 @@ $#_}*!(+([_&%{^&[([%]}*^{{([@+@]@*&@_!]_+([(#&!]]#$$#]@#{_]][_{@]{*))$({%}_![@$]
 
 char={}
 
-for i in str:
+for i in msg:
    if i in char:
       char[i]+=1
    else:
@@ -1250,7 +1250,7 @@ print(char)
 
 # Challenge 3
 #http://www.pythonchallenge.com/pc/def/equality.html
-str="""
+msg="""
 kAewtloYgcFQaJNhHVGxXDiQmzjfcpYbzxlWrVcqsmUbCunkfxZWDZjUZMiGqhRRiUvGmYmvnJIHEmbT
 MUKLECKdCthezSYBpIElRnZugFAxDRtQPpyeCBgBfaRVvvguRXLvkAdLOeCKxsDUvBBCwdpMMWmuELeG
 ENihrpCLhujoBqPRDPvfzcwadMMMbkmkzCCzoTPfbRlzBqMblmxTxNniNoCufprWXxgHZpldkoLCrHJq
@@ -2521,7 +2521,7 @@ count=0
 small=''
 bodyguard=''
 smallletters=''
-for i in str:
+for i in msg:
    if is_upper(i):
       count+=1
       bodyguard+=i
@@ -2542,3 +2542,31 @@ print(smallletters)
 
 # Challenge 4
 #http://www.pythonchallenge.com/pc/def/linkedlist.php
+import re
+import urllib.request
+
+search_html = re.compile("\.html$")
+
+s='12345'
+for i in range(0,400):
+   resource = urllib.request.urlopen('http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing='+s.strip("'[]'"))
+   content =  resource.read().decode(resource.headers.get_content_charset())
+   #print(content)
+   #print(s.strip("'[]'"))
+   z=content.find("two")
+   
+   # handle the solution (last) line
+   if search_html.findall(content):
+      print(content)
+      break
+   
+   if z!=-1:         #there is a string two
+      t=int(s.strip("''[]''"))
+      d=t//2
+      s=str(d)
+   else:             #normal situation
+      s=str(re.findall("next nothing is (\d+)",content))
+      s=s.strip("'[]'")
+
+   #print(i)
+
