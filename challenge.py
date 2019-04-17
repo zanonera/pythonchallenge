@@ -1,7 +1,7 @@
 ## http://www.pythonchallenge.com/
 
 # Challenge 0
-http://www.pythonchallenge.com/pc/def/0.html
+#http://www.pythonchallenge.com/pc/def/0.html
 print (2**38)
 
 # Challenge 1
@@ -1239,5 +1239,14 @@ $#_}*!(+([_&%{^&[([%]}*^{{([@+@]@*&@_!]_+([(#&!]]#$$#]@#{_]][_{@]{*))$({%}_![@$]
 #@}&$[[%]_&$+)$!%{(}$^$}*
 """
 
+char={}
+
 for i in str:
-   print(i)
+   if i in char:
+      char[i]+=1
+   else:
+      char[i]=1
+print(char)
+
+# Challenge 3
+#http://www.pythonchallenge.com/pc/def/equality.html
